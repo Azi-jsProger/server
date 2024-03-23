@@ -91,5 +91,27 @@ export default (state : TInitialState & any, action : TAction) => {
                 user: action.payload
             }
         }
+        case addCommentRequest : {
+            return {
+                ...state,
+                loading: true
+            }
+        }
+        case addCommentSuccess : {
+            return {
+                ...state,
+                oneManga: {
+                    ...state.oneManga,
+                    comments: [...state.oneManga.comments, action.payload]
+                }
+            }
+        }
+        case addCommentFailure : {
+            return {
+                ...state,
+                error : action.payload,
+                loading : false
+            };
+        }
     }
 };

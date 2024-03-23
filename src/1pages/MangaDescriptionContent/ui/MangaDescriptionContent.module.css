@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .box {
   max-width: 1300px;
   height: auto;
@@ -17,11 +18,12 @@
 }
 @media (max-width: 600px) {
   .box .boxForOtherNames {
-    width: 90vw;
+    width: 100vw;
     text-align: center;
     font-family: "Exo 2", sans-serif;
     color: #868686;
     font-weight: 800;
+    font-size: 14px;
   }
 }
 .box .mangaContainer {
@@ -32,6 +34,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: -1;
+}
+@media (min-width: 600px) {
+  .box .mangaContainer .boxImg {
+    background-image: none;
+  }
+}
+.box .mangaContainer .boxImg .backgroundImage {
+  display: none;
+}
+@media (max-width: 600px) {
+  .box .mangaContainer .boxImg .backgroundImage {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -4;
+  }
 }
 .box .mangaContainer .boxImg .photo {
   width: 250px;
@@ -43,6 +63,29 @@
     margin-top: 50px;
     width: 70vw;
     border-radius: 15px;
+  }
+}
+.box .mangaContainer .boxImg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px); /* Размытие заднего фона */
+  z-index: -3;
+}
+@media (max-width: 600px) {
+  .box .mangaContainer .boxImg::after {
+    content: "";
+    display: block;
+    background: linear-gradient(180deg, transparent, #121212);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
   }
 }
 .box .boxForButton {
@@ -58,6 +101,7 @@
     bottom: 0;
     left: 10%;
     gap: 40px;
+    z-index: 10;
   }
 }
 .box .boxForButton .buttonA {
@@ -77,7 +121,8 @@
     height: 50px;
   }
 }
-.box .boxForButton .buttonZakladka {
+.box .boxForButton .buttonZakladkaDesktop {
+  display: block;
   width: 250px;
   height: 40px;
   border-radius: 8px;
@@ -86,10 +131,22 @@
   color: white;
 }
 @media (max-width: 600px) {
-  .box .boxForButton .buttonZakladka {
-    width: 60px;
-    border-radius: 24px;
-    height: 50px;
+  .box .boxForButton .buttonZakladkaDesktop {
+    display: none;
+  }
+}
+.box .boxForButton .buttonZakladkaMobile {
+  display: none;
+  width: 60px;
+  height: 50px;
+  border-radius: 24px;
+  border: none;
+  background-color: #1976d2;
+  color: white;
+}
+@media (max-width: 600px) {
+  .box .boxForButton .buttonZakladkaMobile {
+    display: block;
   }
 }
 .box .boxForButton .buttonNoneChapter {
@@ -102,6 +159,13 @@
   margin-bottom: 15px;
   margin-top: 15px;
   cursor: no-drop;
+  font-size: 16px;
+}
+@media (max-width: 600px) {
+  .box .boxForButton .buttonNoneChapter {
+    border-radius: 24px;
+    height: 50px;
+  }
 }
 
 .skyliton {
@@ -118,10 +182,16 @@
   height: auto;
   overflow-y: scroll;
 }
+@media (min-width: 601px) {
+  .boxForDescriptionOfContent {
+    overflow-x: scroll;
+    height: 100vh;
+  }
+}
 @media (max-width: 600px) {
   .boxForDescriptionOfContent {
     overflow: visible;
-    margin: 0 20px 0 20px;
+    margin: 0;
     width: 100vw;
   }
 }
@@ -141,7 +211,7 @@
 @media (max-width: 600px) {
   .boxForDescriptionOfContent .boxForName .NameTitle {
     text-align: center;
-    width: 90vw;
+    width: 100vw;
     font-weight: 500;
     font-family: "Exo 2", sans-serif;
   }
@@ -156,7 +226,7 @@
     font-weight: 500;
     color: #868686;
     display: block;
-    width: 90vw;
+    width: 100vw;
     text-align: center;
   }
 }
@@ -194,6 +264,7 @@
     width: 100vw;
     gap: 0;
     justify-content: center;
+    border-bottom: none;
   }
 }
 .boxForDescriptionOfContent .boxForRating .elementRating {
@@ -279,6 +350,13 @@
   }
 }
 
+@media (max-width: 600px) {
+  .description {
+    padding-left: 20px;
+    border-radius: 30px 30px 0 0;
+    background-color: #171717;
+  }
+}
 .description .boxforbtn {
   display: flex;
   gap: 10px;
@@ -349,20 +427,28 @@
   width: 100%;
   margin: 0;
 }
+@media (max-width: 600px) {
+  .p .descriptionManga {
+    line-height: 1.6;
+  }
+}
 .p .boxComments {
   margin-top: 20px;
   width: 100%;
   height: 100%;
   display: block;
 }
+.p .boxComments h2 {
+  font-weight: 600;
+}
 @media (max-width: 767px) {
   .p .boxComments h2 {
-    font-size: calc(2px + 34 * (100vw - 320px) / 1280);
+    font-size: calc(20px + 3.4 * (100vw - 320px) / 1280);
   }
 }
 @media (min-width: 767px) {
   .p .boxComments h2 {
-    font-size: calc(2px + 20 * 100vw/1280);
+    font-size: calc(20px + 2 * 100vw/1280);
   }
 }
 .p .boxComments .Comments {
@@ -370,10 +456,15 @@
   display: grid;
   gap: 40px;
 }
+@media (max-width: 600px) {
+  .p .boxComments .Comments {
+    gap: 5px;
+  }
+}
 .p .boxComments .Comments .boxComment {
   height: auto;
   padding: 5px 20px 0 20px;
-  background-color: #171717;
+  background-color: #181818;
   border-radius: 16px;
 }
 .p .boxComments .Comments .boxComment .boxLike {
@@ -384,14 +475,20 @@
 .ul {
   width: 50vw;
 }
+@media (max-width: 600px) {
+  .ul {
+    width: 100vw;
+  }
+}
 .ul .Li {
+  position: relative;
   text-align: center;
-  width: 50vw;
+  width: 90%;
   display: flex;
   justify-content: space-around;
-  background-color: #181818;
+  background-color: #1d1d1d;
   border-radius: 8px;
-  height: 6vh;
+  height: 40px;
   flex-wrap: nowrap;
   flex-direction: row;
   align-items: center;
@@ -399,12 +496,69 @@
 }
 @media (max-width: 767px) {
   .ul .Li {
-    font-size: calc(10px + 10.2 * (100vw - 320px) / 1280);
+    font-size: calc(14px + 3.4 * (100vw - 320px) / 1280);
   }
 }
 @media (min-width: 767px) {
   .ul .Li {
-    font-size: calc(10px + 6 * 100vw/1280);
+    font-size: calc(14px + 2 * 100vw/1280);
+  }
+}
+@media (max-width: 600px) {
+  .ul .Li {
+    height: 60px;
+  }
+}
+.ul .Li .LiElementDesktop {
+  display: block;
+}
+@media (max-width: 600px) {
+  .ul .Li .LiElementDesktop {
+    display: none;
+  }
+}
+.ul .Li .LiElementMobileLeft {
+  position: absolute;
+  left: 5%;
+  display: none;
+}
+@media (max-width: 600px) {
+  .ul .Li .LiElementMobileLeft {
+    display: flex;
+    position: absolute;
+  }
+}
+.ul .Li .LiElementMobileLeft .idTranslator {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 16px;
+  gap: 7px;
+  font-size: 17px;
+}
+.ul .Li .LiElementMobileLeft .idTranslator .translator {
+  font-size: 13px;
+  color: #acacac;
+}
+.ul .Li .LiElementMobileLeft .dataMobile {
+  font-size: 13px;
+  color: #acacac;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.ul .Li .LiElementMobileRight {
+  position: absolute;
+  right: 5%;
+  display: none;
+}
+@media (max-width: 600px) {
+  .ul .Li .LiElementMobileRight {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    position: absolute;
+    color: #ff9800;
   }
 }
 

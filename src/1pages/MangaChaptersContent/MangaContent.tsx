@@ -87,18 +87,17 @@ const MangaContent = () => {
         }
     ];
 
-
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const { data } = await axios.get(`http://localhost:5005/mangas/${mangaId}`);
                 localStorage.setItem(`${LocalStorageUserLastChapter}${data?.name}`, `${chapter}`)
-                setChaptersLists(data.chaptersLists);
-                setLoading(true);
+                setChaptersLists(data.chaptersLists)
+                setLoading(true)
             } catch (error) {
-                console.log(error);
-                setLoading(false);
-                setChaptersLists(data);
+                console.log(error)
+                setLoading(false)
+                setChaptersLists(data)
             }
         };
         fetchData();

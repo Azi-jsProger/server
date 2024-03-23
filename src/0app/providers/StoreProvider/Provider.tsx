@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { createContext, useCallback, useReducer } from 'react';
+import React, { createContext, useCallback, useReducer, Dispatch } from 'react';
 
 import initialState from "./initialState";
 import reducer from "./reducer";
@@ -8,8 +8,10 @@ import {API_URL} from "../../../5shered/api/api";
 
 
 export type TContextProps = {
+    dispatch?: Dispatch<{type: string, payload?:any}>;
     getData?: () => Promise<void>;
-    addComment?: (newComment: any,id: string | number, clearForm :() => void) => Promise<void>
+    getOneManga?: (id : string | number) => Promise<void>;
+    addComment?: (newComment: { author:string,comment:string,like:number,disLike:number },id: string | number, clearForm :() => void,oneManga: TManga) => Promise<void>
     regUser?: (email: string, password: string, Navigate: () => void) => Promise<void>;
     loginUser?: (email: string, password: string, Navigate: () => void, toggleReg: () => void) => Promise<void | string | undefined>;
     fastLoginUser?: (email: string, password: string) => Promise<void | string | undefined>;
@@ -20,6 +22,7 @@ export type TInitialState = {
     manga: TManga[];
     loading: boolean;
     error: any;
+    oneManga: TManga
     user: {
         email: string;
         password: string;
@@ -42,7 +45,6 @@ interface users {
 export const AppContext = createContext<TInitialState & TContextProps>(initialState);
 
 const Provider = ({ children }: React.PropsWithChildren) => {
-
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const getData = useCallback(async () => {
@@ -54,22 +56,27 @@ const Provider = ({ children }: React.PropsWithChildren) => {
             dispatch({ type: "getFailure", payload: error });
         }
     }, []);
-
-    const addComment = useCallback(async (newComment: any, id: number | string, clearForm: () => void) => {
+    const getOneManga = useCallback(async (id: number | string) => {
         try {
-            dispatch({ type: "addRequest" });
-            const { data: mangaItem } = await axios.get(`${API_URL}/mangas/${id}`);
-            console.log(mangaItem)
-            if (mangaItem && mangaItem.comments) {
-                mangaItem.comments.push(newComment);
-                await axios.put(`${API_URL}/mangas/${id}`, mangaItem);
-                clearForm();
-                dispatch({ type: "addSuccess" });
-            } else {
-                dispatch({ type: "getFailure", payload: "Манга не найдена или нет комментариев" });
-            }
+            dispatch({ type: "getRequestOneManga" });
+            const { data } = await axios.get(`${API_URL}/mangas/${id}`);
+            dispatch({ type: "getSuccessOneManga", payload: data});
         } catch (error) {
-            dispatch({ type: "getFailure", payload: error });
+            dispatch({ type: "getFailureOneManga", payload: error });
+        }
+    }, []);
+
+    const addComment = useCallback(async (newComment: { author:string,comment:string,like:number,disLike:number }, id: number | string, clearForm: () => void, oneManga:TManga) => {
+        try {
+            dispatch?.({ type: "addCommentRequest" });
+            const { data: mangaItem } = await axios.get(`${API_URL}/mangas/${id}`);
+            mangaItem.comments.push(newComment);
+            console.log(mangaItem, "addComment")
+            await axios.put(`${API_URL}/mangas/${id}`, mangaItem);
+            clearForm();
+            dispatch?.({ type: "addCommentSuccess", payload:newComment });
+        } catch (error) {
+            dispatch?.({ type: "addCommentFailure", payload: error });
         }
     }, []);
 
@@ -143,13 +150,16 @@ const Provider = ({ children }: React.PropsWithChildren) => {
         manga: state.manga,
         loading: state.loading,
         error: state.error,
+        oneManga: state.oneManga,
+        user: state.user,
         addComment,
         getData,
+        getOneManga,
         regUser,
         loginUser,
         fastLoginUser,
         checkEmail,
-        user: state.user
+        dispatch
     };
 
     return (

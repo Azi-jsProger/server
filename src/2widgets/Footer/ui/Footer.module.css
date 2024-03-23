@@ -1,3 +1,69 @@
-
+.Footer {
+  border-top: 0.5px solid grey;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100vw;
+  height: 880px;
+  padding: 32px 32px 24px 32px;
+}
+.Footer .box1 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.Footer .box1 .elem1 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.Footer .box1 .elem1 .ReManga {
+  font-size: 20px;
+}
+.Footer .box1 .elem1 .otvet {
+  font-size: 16px;
+  color: #a9a9a9;
+}
+.Footer .box1 .elem2 {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.Footer .box1 .elem2 .emailFor {
+  color: #a9a9a9;
+  font-size: 16px;
+}
+.Footer .box2 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.Footer .box2 .elem1 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #a9a9a9;
+  font-size: 12px;
+}
+.Footer .box2 .elem1 .title {
+  font-size: 18px;
+  color: white;
+}
+.Footer .box3 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.Footer .box3 .elem1 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #a9a9a9;
+  font-size: 12px;
+}
+.Footer .box3 .elem1 .title {
+  font-size: 18px;
+  color: white;
+}
 
 /*# sourceMappingURL=Footer.module.css.map */

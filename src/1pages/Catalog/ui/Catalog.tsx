@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useContext, useEffect, useMemo, useRef, useState} from 'react';
 import { AppContext } from "../../../0app/providers/StoreProvider/Provider";
 import { CatalogList } from '../../../3features/CatalogList';
 import { TManga } from "../../../5shered/types/MangaTypes";
@@ -7,13 +7,15 @@ import cls from "./Catalog.module.scss"
 import { RiMenuSearchLine } from "react-icons/ri";
 import { Dropdown } from "../../../2widgets";
 import CatalogSelectorsInp  from "../.././../2widgets/CatalogSelesectorsInp/ui/CatalogSelectorsInp";
-
+import { RiArrowDropDownLine } from "react-icons/ri";
+import {classNames} from "../../../5shered/styleFunction/classNameFn";
 
 const Catalog = () => {
     const { getData, manga } = useContext(AppContext)
     const [dropdown, setDropdown] = useState(false)
     const [filteredManga, setFilteredManga] = useState<TManga[]>([])
     const [nameSelector, setNameSelector] = useState("По популярности")
+    const [ifCollapsed, setIsCollapsed] = useState<boolean>(false)
 
     useEffect(() => {
         getData?.()
@@ -24,7 +26,7 @@ const Catalog = () => {
     }, [manga]);
 
     const onSortFn = (arr:TManga[]) => {
-        setFilteredManga(arr)
+        return setFilteredManga(arr)
     }
 
     const log = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -89,16 +91,23 @@ const Catalog = () => {
         }
     }
 
-
     return (
         <div className={cls.main}>
             <div className={cls.boxHButton}>
-                <h1>Каталог</h1>
+                <div className={cls.boxTitleAndBurgerMenu}>
+                    <h1 className={cls.title}>Каталог</h1>
+                    <button
+                        className={cls.filteredBurgerMenu}
+                        onClick={() => setIsCollapsed(prev => !prev)}
+                    >
+                        ФИЛЬТРЫ <RiArrowDropDownLine size={28}/>
+                    </button>
+                </div>
                 <button
-                    className={cls.button}
+                    className={cls.buttonDropdown}
                     onClick={() => { setDropdown(prev => !prev) }}
                 >
-                    <RiMenuSearchLine /> {nameSelector}
+                    <RiMenuSearchLine /> {nameSelector} <RiArrowDropDownLine size={24} className={cls.RiArrowDropDownLine}/>
                 </button>
                 {dropdown && (
                     <Dropdown
@@ -131,8 +140,13 @@ const Catalog = () => {
                         />
                     )}
                 />
-
-                <CatalogSelectorsInp mangas={filteredManga} onSortFn={onSortFn}/>
+                <div className={classNames(cls.fon, {[cls.fonActive]:ifCollapsed})}></div>
+                <CatalogSelectorsInp
+                    setIsCollapsed={setIsCollapsed}
+                    mangas={filteredManga}
+                    onSortFn={onSortFn}
+                    className={classNames(cls.CatalogSelectorsInp, {[cls.CatalogSelectorsInpTransform]: ifCollapsed})}
+                />
             </div>
         </div>
     );

@@ -2,6 +2,11 @@ form {
   width: 60vw;
   max-width: 60vw;
 }
+@media (max-width: 600px) {
+  form {
+    width: 100vw;
+  }
+}
 form .input {
   border: none;
   background-color: #1b1b1b;
@@ -10,6 +15,7 @@ form .input {
   border-radius: 22px;
   outline: none;
   font-weight: 600;
+  font-size: 17px;
 }
 @media (max-width: 767px) {
   form .input {
@@ -21,35 +27,26 @@ form .input {
     padding: calc(12px + 8 * 100vw/1280);
   }
 }
-@media (max-width: 767px) {
-  form .input {
-    font-size: calc(11px + 8.5 * (100vw - 320px) / 1280);
-  }
-}
-@media (min-width: 767px) {
-  form .input {
-    font-size: calc(11px + 5 * 100vw/1280);
-  }
+form .input:focus {
+  outline: none;
 }
 form .input::placeholder {
   font-weight: 700;
   font-size: 17px;
+}
+@media (max-width: 600px) {
+  form .input {
+    width: 85vw;
+    padding: 25px 0 25px 20px;
+  }
 }
 form .inputWar {
   border: 1px solid red;
 }
 form .textValueLength {
   color: #a9a9a9;
-}
-@media (max-width: 767px) {
-  form .textValueLength {
-    font-size: calc(8px + 6.8 * (100vw - 320px) / 1280);
-  }
-}
-@media (min-width: 767px) {
-  form .textValueLength {
-    font-size: calc(8px + 4 * 100vw/1280);
-  }
+  font-size: 12px;
+  margin-left: 1%;
 }
 form .war {
   color: red;

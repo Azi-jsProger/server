@@ -30,4 +30,13 @@
   height: 0;
 }
 
+.name {
+  color: white;
+  font-weight: 700;
+}
+
+.category {
+  color: #a9a9a9;
+}
+
 /*# sourceMappingURL=MangaCard.module.css.map */

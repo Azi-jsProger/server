@@ -1,33 +1,38 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import cls from "../../../1pages/Catalog/ui/Catalog.module.scss";
 import {TManga} from "../../../5shered/types/MangaTypes";
+import {useClickOutside} from "../../../5shered";
 
 interface i {
     mangas: TManga[];
     onSortFn: (arr:TManga[]) => void;
+    className: string;
+    setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 type ValueInput ={
-    types?: string,
-    genres?: string,
+    types: string,
+    genres: string,
     projectStatus?: string,
-    ageRating?: string,
-    releaseYearFrom?: number,
-    releaseYearTo?: number,
-    ratingFrom?: number,
-    ratingTo?: number
+    ageRating: string,
+    releaseYearFrom: string,
+    releaseYearTo: string,
+    ratingFrom: number,
+    ratingTo: number,
+
 };
 
 const CatalogSelectorsInp = (props:i) => {
-    const { mangas, onSortFn } = props;
+    const ref = useRef(null)
+    const { mangas, onSortFn, className, setIsCollapsed } = props;
     const [ textInput, setTextInput ] = useState<ValueInput>(
         {
             types: "",
             genres: "",
             projectStatus: "",
             ageRating: "",
-            releaseYearFrom: 0,
-            releaseYearTo: 0,
+            releaseYearFrom: "",
+            releaseYearTo: "",
             ratingFrom: 0,
             ratingTo: 0
         }
@@ -50,13 +55,13 @@ const CatalogSelectorsInp = (props:i) => {
                 return true
             }else if ( manga.status === textInput.projectStatus ) {
                 return true
-            }else if (manga.data === textInput.releaseYearFrom) {
+            }else if (manga.data + "" >= textInput.releaseYearFrom && manga.data + "" <= textInput.releaseYearTo) {
                 return true
             }else if (manga.rating === textInput.ratingFrom) {
                 return true
             }else if (manga.rating === textInput.ratingTo) {
                 return true
-            }else{
+            }else {
                 return false
             }
         })
@@ -64,10 +69,20 @@ const CatalogSelectorsInp = (props:i) => {
         onSortFn(filteredResult)
     }
 
+    useClickOutside(
+        ref, () => {
+            setIsCollapsed(false)
+        }
+    )
+
     return (
-        <>
+        <div className={className} ref={ref}>
         <div className={cls.selectorsInp}>
             <div className={cls.boxInp}>
+                <div className={cls.boxTitle}>
+                    <span className={cls.title}>Фильтры</span>
+                    <span className={cls.reset}>ОЧИСТИТЬ</span>
+                </div>
                 <div className={cls.firstInputs}>
                     <input className={cls.input} placeholder={"Типы"} id={"types"} onChange={handleInputChange}/>
                 </div>
@@ -101,7 +116,7 @@ const CatalogSelectorsInp = (props:i) => {
                 <button className={cls.button} onClick={onSort}>Применить фильтры</button>
             </div>
         </div>
-        </>
+        </div>
     );
 };
 

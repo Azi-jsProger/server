@@ -23,21 +23,23 @@ const Header = (props: THeadersProps) => {
                             alt={""}
                         />
                     </Link>
-                    <Link to={'/manga/Catalog'}>
+                    <Link to={'/manga/Catalog'} className={cls.catalog}>
                         <div>Каталог</div>
                     </Link>
-                    <Link to={'/manga/mangaTops'}>
+                    <Link to={'/manga/mangaTops'} className={cls.tops}>
                         <div>Топы</div>
                     </Link>
-                    <Link to={''}>
+                    <Link to={''} className={cls.select}>
                         <div>Поиск</div>
                     </Link>
                 </div>
                 <div></div>
                 <div className={cls.tree}>
-                    <div>Закладки</div>
-                    <Link to={'/manga/push'}>
-                        <div>Уведомление</div>
+                    <Link to={""} className={cls.bookmarks}>
+                        Закладки
+                    </Link>
+                    <Link to={'/manga/push'} className={cls.push}>
+                        Уведомление
                     </Link>
                     {
                         user

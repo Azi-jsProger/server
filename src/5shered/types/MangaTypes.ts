@@ -20,6 +20,6 @@ export type TManga = {
     author?: string;
     genres?: string[];
     comments?: { author:string,comment:string,like:number,disLike:number }[],
-    chaptersLists?: [{translator:string,img:string[],like:number,data:string}] | undefined;
+    chaptersLists?: [{translator:string,img:string[],like:number,data:string}] | [];
 };
 

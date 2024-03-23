@@ -5,21 +5,29 @@ import Button from "../../../../5shered/ui/button";
 import {IPropsForTManga} from "../../../../5shered/types/types";
 import {Link} from "react-router-dom";
 import {LocalStorageUserLastChapter} from "../../../../5shered/consts/localStorageUserGlava";
+import {RiArrowDropDownLine} from "react-icons/ri";
+import { PiBookmarkSimpleLight } from "react-icons/pi";
 
-const CardMagnaBoxForImgNuv = ({mangaContent}:IPropsForTManga) => {
-    const lastChapter = localStorage.getItem(`${LocalStorageUserLastChapter}${mangaContent?.name}`) || 0
+const CardMagnaBoxForImgNuv = ({ oneManga }:IPropsForTManga) => {
+    const lastChapter = localStorage.getItem(`${LocalStorageUserLastChapter}${oneManga?.name}`) || 0
 
     return (
         <div className={cls.mangaContainer}>
-            {mangaContent && (
+            {oneManga && (
                 <div>
                     {/* Картинка и кнопка чтения и добавления в закладки */}
                     <div className={cls.boxImg}>
                         {/* Для скелетона, когда картинка грузится долго */}
-                        {mangaContent.photo ? (
+                        {oneManga.photo && (
+                            <img
+                                className={classNames(cls.backgroundImage)}
+                                src={oneManga.photo}
+                                alt={'Технические шоколадки'}
+                            />)}
+                        {oneManga.photo ? (
                             <img
                                 className={classNames(cls.photo)}
-                                src={mangaContent.photo}
+                                src={oneManga.photo}
                                 alt={'Технические шоколадки'}
                             />
                         ) : (
@@ -27,7 +35,7 @@ const CardMagnaBoxForImgNuv = ({mangaContent}:IPropsForTManga) => {
                         )}
                     </div>
                     <div className={classNames(cls.boxForButton)}>
-                        {mangaContent.chaptersLists && mangaContent.chaptersLists.length ? (
+                        {oneManga.chaptersLists && oneManga.chaptersLists.length ? (
                             <Link
                                 to={`${lastChapter}`}
                                 className={classNames(cls.buttonA)}
@@ -42,8 +50,12 @@ const CardMagnaBoxForImgNuv = ({mangaContent}:IPropsForTManga) => {
                             </button>
                         )}
                         <Button
-                            className={classNames(cls.buttonZakladka)}
+                            className={classNames(cls.buttonZakladkaDesktop)}
                             content={"Добавить в закладки"}
+                        />
+                        <Button
+                            className={classNames(cls.buttonZakladkaMobile)}
+                            content={<div style={{display:"flex",justifyContent:"center", alignItems:"center"}}><PiBookmarkSimpleLight size={24} fontWeight={700}/><RiArrowDropDownLine size={18}/></div>}
                         />
                     </div>
                 </div>

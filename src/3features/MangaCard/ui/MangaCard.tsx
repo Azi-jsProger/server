@@ -19,9 +19,9 @@ const MangaCard = (props: TManga) => {
                             alt={"Технические шоколадки"}
                         />
                     </div>
-                    <p>{category} <span className={classNames(cls.rating)}> {rating}</span> <span
+                    <p className={cls.category}>{category} <span className={classNames(cls.rating)}> {rating}</span> <span
                         className={classNames(cls.z)}>★</span></p>
-                    <h5>{name}</h5>
+                    <h5 className={cls.name}>{name}</h5>
                 </div>
             </Link>
         </>

@@ -4,7 +4,7 @@ import {AppContext} from "../../../0app/providers/StoreProvider/Provider";
 import {classNames} from "../../../5shered/styleFunction/classNameFn";
 
 const AddComment = (props: any) => {
-    const { id } = props
+    const { id, oneManga } = props
     const { addComment } = useContext(AppContext);
     const user = localStorage.getItem("user");
     const [commentText, setCommentText] = useState<string>('')
@@ -24,9 +24,11 @@ const AddComment = (props: any) => {
             const author = JSON.parse(user).email
             const newComment = {
                 author: author,
-                comment: commentText
+                comment: commentText,
+                like:0,
+                disLike:0
             };
-            addComment?.(newComment, id, clearForm);
+            addComment?.(newComment, id, clearForm, oneManga);
         } else {
             setCommentWar(true)
             console.log("Только авторизованные пользователи могут оставлять комментарии")

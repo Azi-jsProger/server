@@ -3,6 +3,7 @@ import cls from "./Main.module.scss"
 import {classNames} from "../../../5shered/styleFunction/classNameFn";
 import {AppContext} from "../../../0app/providers/StoreProvider/Provider";
 import {MangaCard} from "../../../3features/MangaCard";
+import {Link} from "react-router-dom";
 
 const Main = () => {
     const { manga, getData } = useContext(AppContext)
@@ -13,6 +14,17 @@ const Main = () => {
 
     return (
         <div>
+            <div className={cls.nuvBar}>
+                <Link to={'/manga/Catalog'}>
+                    КАТАЛОГ
+                </Link>
+                <Link to={'/manga/mangaTops'}>
+                    ТОПЫ
+                </Link>
+                <Link to={''}>
+                    ПОИСК
+                </Link>
+            </div>
             <div className={classNames(cls.boxScroll)}>
                 {
                     manga.map(manga =>

@@ -1,14 +1,17 @@
 .header {
   width: 100vw;
-  height: 60px;
+  height: 56px;
   background-color: #171717;
+  display: flex;
+  justify-content: center;
+
 
   .nav {
-    width: 100vw;
+    width: 90vw;
     margin: 0 0 auto;
     height: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 
     .One {
@@ -20,6 +23,24 @@
         width: 45px;
         height: 45px;
         border-radius: 50%;
+      }
+
+      .catalog {
+        @media (max-width: 800px) {
+          display: none;
+        }
+      }
+
+      .tops {
+        @media (max-width: 800px) {
+          display: none;
+        }
+      }
+
+      .select {
+        @media (max-width: 800px) {
+          display: none;
+        }
       }
     }
 
@@ -48,6 +69,18 @@
 
         &:hover {
           box-shadow: 0 0 7px #3f5495; /* Изменяем тень на нулевую при наведении указателя мыши */
+        }
+      }
+
+      .bookmarks {
+        @media (max-width: 800px) {
+          display: none;
+        }
+      }
+
+      .push {
+        @media (max-width: 800px) {
+          display: none;
         }
       }
     }
