@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useMemo, useRef, useState} from 'react';
 import { AppContext } from "../../../0app/providers/StoreProvider/Provider";
 import { CatalogList } from '../../../3features/CatalogList';
 import { TManga } from "../../../5shered/types/MangaTypes";
-import { MangaCard } from "../../../3features/MangaCard";
+import { MangaCard } from "../../../2widgets/MangaCard";
 import cls from "./Catalog.module.scss"
 import { RiMenuSearchLine } from "react-icons/ri";
 import { Dropdown } from "../../../2widgets";
@@ -132,6 +132,9 @@ const Catalog = () => {
                     manga={filteredManga}
                     render={(filteredManga: TManga) => (
                         <MangaCard
+                            img={cls.img}
+                            wrapperForImg={cls.wrapperForImg}
+                            element={cls.element}
                             id={filteredManga.id}
                             photo={filteredManga.photo}
                             name={filteredManga.name}

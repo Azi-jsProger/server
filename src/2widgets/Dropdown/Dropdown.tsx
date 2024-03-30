@@ -1,17 +1,23 @@
-import React, {ReactNode} from 'react';
+import React, {ReactNode, useState} from 'react';
+import cls from "./Dropdown.module.scss"
+import {classNames} from "../../5shered/styleFunction/classNameFn";
 
 type TDropdownProps = {
     children: ReactNode,
-    className: string
+    className: string,
+    darcking?:boolean
 }
 
 const Dropdown = (props: TDropdownProps) => {
-    const { children, className } = props
+    const { children, className, darcking } = props
 
     return (
-        <ul className={className}>
-            {children}
-        </ul>
+        <>
+            <div className={classNames(cls.none, {[cls.darcking]: darcking})}></div>
+            <ul className={className} style={{zIndex:"101"}}>
+                {children}
+            </ul>
+        </>
     );
 };
 

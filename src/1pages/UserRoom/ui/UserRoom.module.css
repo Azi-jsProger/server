@@ -1,52 +1,34 @@
-.content {
-  overflow-x: hidden;
-  max-width: 1280px;
-  height: 600px;
+.content .profile_header {
+  width: 100vw;
+  height: 1500px;
+  background-color: #1976d2;
   display: flex;
-  justify-content: center;
+  gap: 6px;
 }
-.content .padding {
-  width: 1280px;
-  padding: 0 13% 0 13%;
+.content .profile_header .li {
+  height: 240px;
+  background-color: red;
 }
-.content .padding .profileHeader {
-  position: relative;
-  height: 200px;
-  display: flex;
-  align-items: center;
+@media (min-width: 600px) and (max-width: 768px) {
+  .content .profile_header .li {
+    width: 20%;
+    height: 40%;
+    background-color: #ffffff;
+  }
 }
-.content .padding .profileHeader .boxImg {
-  width: 200px;
-  height: 200px;
-  padding: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@media (min-width: 768px) and (max-width: 1024px) {
+  .content .profile_header .li {
+    width: 40%;
+    height: 80%;
+    background-color: #000000;
+  }
 }
-.content .padding .profileHeader .boxImg .img {
-  border: 2px solid black;
-  border-radius: 50%;
-  width: 150px;
-  height: 150px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.content .padding .profileHeader .boxImg .img .icon {
-  font-size: 80px;
-}
-.content .padding .profileHeader .boxImg .img .noImg {
-  background-color: #171717;
-  width: 100%;
-  height: 100%;
-}
-.content .padding .profileHeader .bottomSolid {
-  position: absolute;
-  bottom: 0;
-  left: -50%;
-  width: 130vw;
-  border: 0.5px solid #393939;
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .content .profile_header .li {
+    width: 80%;
+    height: 160%;
+    background-color: #a2178d;
+  }
 }
 
 /*# sourceMappingURL=UserRoom.module.css.map */

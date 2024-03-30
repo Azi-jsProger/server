@@ -9,10 +9,36 @@
     width: 100vw;
     height: 45px;
     background-color: #1976d2;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 
     a {
       font-weight: 700;
+    }
+  }
+
+  .catalog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .catalogIcon {
+      transform: translateY(25%);
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .tops {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    .topsIcon {
+      transform: translateY(25%);
+      width: 40px;
+      height: 40px;
     }
   }
 }
@@ -35,7 +61,7 @@
   display: flex;
   flex-wrap: nowrap;
   overflow-x: scroll;
-  gap: 1vh;
+  gap: 6px;
   padding-bottom: 10px;
   padding-left: 5px;
 }
@@ -58,7 +84,7 @@
 .wrapperForNovelt {
   display: flex;
   justify-content: space-evenly;
-  gap: 5px;
+  gap: 6px;
   flex-wrap: nowrap;
   flex-direction: row;
   align-content: stretch;

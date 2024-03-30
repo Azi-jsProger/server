@@ -4,11 +4,12 @@ import { Route, Routes } from "react-router-dom";
 import { AppRouteProps, routerConfig } from "../config/routerConfig";
 
 const AppRouter = () => {
-    const render = useCallback((route : AppRouteProps) => {
+    const render = useCallback((route : AppRouteProps, id: number) => {
         return (
             <Route
                 path={route.path}
                 element={route.element}
+                key={id}
             />
         );
     },[]);

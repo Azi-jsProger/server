@@ -50,7 +50,7 @@ const Provider = ({ children }: React.PropsWithChildren) => {
     const getData = useCallback(async () => {
         try {
             dispatch({ type: "getRequest" });
-            const { data } = await axios.get(`${API_URL}/mangas`);
+            const { data } = await axios.get(`${API_URL}/manga/?format=json`);
             dispatch({ type: "getSuccess", payload: data});
         } catch (error) {
             dispatch({ type: "getFailure", payload: error });
@@ -59,7 +59,7 @@ const Provider = ({ children }: React.PropsWithChildren) => {
     const getOneManga = useCallback(async (id: number | string) => {
         try {
             dispatch({ type: "getRequestOneManga" });
-            const { data } = await axios.get(`${API_URL}/mangas/${id}`);
+            const { data } = await axios.get(`${API_URL}/manga/${id}/`);
             dispatch({ type: "getSuccessOneManga", payload: data});
         } catch (error) {
             dispatch({ type: "getFailureOneManga", payload: error });
@@ -69,10 +69,10 @@ const Provider = ({ children }: React.PropsWithChildren) => {
     const addComment = useCallback(async (newComment: { author:string,comment:string,like:number,disLike:number }, id: number | string, clearForm: () => void, oneManga:TManga) => {
         try {
             dispatch?.({ type: "addCommentRequest" });
-            const { data: mangaItem } = await axios.get(`${API_URL}/mangas/${id}`);
+            const { data: mangaItem } = await axios.get(`${API_URL}/manga/${id}`);
             mangaItem.comments.push(newComment);
-            console.log(mangaItem, "addComment")
-            await axios.put(`${API_URL}/mangas/${id}`, mangaItem);
+            console.log(mangaItem, "addComment");
+            await axios.put(`${API_URL}/manga/${id}`, mangaItem);
             clearForm();
             dispatch?.({ type: "addCommentSuccess", payload:newComment });
         } catch (error) {

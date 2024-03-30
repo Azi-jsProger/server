@@ -2,23 +2,29 @@ import React, {useContext, useEffect} from 'react';
 import cls from "./Main.module.scss"
 import {classNames} from "../../../5shered/styleFunction/classNameFn";
 import {AppContext} from "../../../0app/providers/StoreProvider/Provider";
-import {MangaCard} from "../../../3features/MangaCard";
+import {MangaCard} from "../../../2widgets/MangaCard";
 import {Link} from "react-router-dom";
+import axios from "axios";
+import {API_URL} from "../../../5shered/api/api";
 
 const Main = () => {
     const { manga, getData } = useContext(AppContext)
+
+
 
     useEffect(() => {
         getData?.()
     },[])
 
+
+
     return (
         <div>
             <div className={cls.nuvBar}>
-                <Link to={'/manga/Catalog'}>
+                <Link to={'/manga/Catalog'} className={cls.catalog}>
                     КАТАЛОГ
                 </Link>
-                <Link to={'/manga/mangaTops'}>
+                <Link to={'/manga/mangaTops'} className={cls.tops}>
                     ТОПЫ
                 </Link>
                 <Link to={''}>
@@ -29,6 +35,8 @@ const Main = () => {
                 {
                     manga.map(manga =>
                         <MangaCard
+                            width={"128px"}
+                            height={"280px"}
                             key={manga.id}
                             id={manga.id}
                             photo={manga.photo}
@@ -46,6 +54,8 @@ const Main = () => {
                             {
                                 manga.map(manga =>
                                     <MangaCard
+                                        width={"128px"}
+                                        height={"280px"}
                                         key={manga.id}
                                         id={manga.id}
                                         photo={manga.photo}

@@ -9,7 +9,6 @@ const UserRoom = () => {
     return (
         <div className={cls.content}>
             <div className={cls.profile_header}>
-
             </div>
         </div>
     )

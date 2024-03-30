@@ -22,4 +22,3 @@ export type TManga = {
     comments?: { author:string,comment:string,like:number,disLike:number }[],
     chaptersLists?: [{translator:string,img:string[],like:number,data:string}] | [];
 };
-

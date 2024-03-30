@@ -90,7 +90,7 @@ const MangaContent = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data } = await axios.get(`http://localhost:5005/mangas/${mangaId}`);
+                const { data } = await axios.get(`http://localhost:5005/manga/${mangaId}`);
                 localStorage.setItem(`${LocalStorageUserLastChapter}${data?.name}`, `${chapter}`)
                 setChaptersLists(data.chaptersLists)
                 setLoading(true)

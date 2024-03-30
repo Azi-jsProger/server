@@ -41,12 +41,11 @@ const Header = (props: THeadersProps) => {
                     <Link to={'/manga/push'} className={cls.push}>
                         Уведомление
                     </Link>
+
                     {
                         user
                             ?   <button className={cls.userLogo}>
-                                    <Link to={"/manga/userRoom"}>
                                         <FaUser color={"white"}/>
-                                    </Link>
                                 </button>
                             : <button onClick={() =>
                                       setReg?.(prev => !prev)}

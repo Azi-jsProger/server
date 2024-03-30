@@ -8,7 +8,7 @@
       "favoriteMangas": []
     }
   ],
-  "mangas": [
+  "manga": [
     {
       "id": 1,
       "photo": "/assets/my/main.jpg",
@@ -28,7 +28,7 @@
       "chapters": 2,
       "data": 2018,
       "translator": [],
-      "author": "",
+      "author": "kto-to",
       "comments": [
         {
           "author": "Author",
@@ -49,6 +49,12 @@
         {
           "author": "greenchay16@gmail.com",
           "comment": "print"
+        },
+        {
+          "author": "greenchay16@gmail.com",
+          "comment": "printinnowenjk",
+          "like": 0,
+          "disLike": 0
         }
       ],
       "genres": [
@@ -253,6 +259,66 @@
           "comment": "зкште()",
           "like": 0,
           "disLike": 0
+        },
+        {
+          "author": "greenchay16@gmail.com",
+          "comment": "print()",
+          "like": 0,
+          "disLike": 0
+        },
+        {
+          "author": "greenchay16@gmail.com",
+          "comment": "print()",
+          "like": 0,
+          "disLike": 0
+        },
+        {
+          "author": "greenchay16@gmail.com",
+          "comment": "print9)",
+          "like": 0,
+          "disLike": 0
+        },
+        {
+          "author": "greenchay16@gmail.com",
+          "comment": "pritn()",
+          "like": 0,
+          "disLike": 0
+        },
+        {
+          "author": "greenchay16@gmail.com",
+          "comment": "print()",
+          "like": 0,
+          "disLike": 0
+        },
+        {
+          "author": "greenchay16@gmail.com",
+          "comment": "print()",
+          "like": 0,
+          "disLike": 0
+        },
+        {
+          "author": "greenchay16@gmail.com",
+          "comment": "hurwhuhs",
+          "like": 0,
+          "disLike": 0
+        },
+        {
+          "author": "greenchay16@gmail.com",
+          "comment": "wfjwefiew",
+          "like": 0,
+          "disLike": 0
+        },
+        {
+          "author": "greenchay16@gmail.com",
+          "comment": "wghwrou",
+          "like": 0,
+          "disLike": 0
+        },
+        {
+          "author": "greenchay16@gmail.com",
+          "comment": "lol",
+          "like": 0,
+          "disLike": 0
         }
       ],
       "genres": [
@@ -370,12 +436,12 @@
       ],
       "genres": [
         "Драма",
-        " Элементы юмора",
+        "Элементы юмора",
         "Повседневность",
         "Романтика",
         "Сёнэн",
         "Спорт",
-        " Школьная ",
+        "Школьная",
         "жизньКомедия",
         "В цвете",
         "Криминал",
@@ -561,7 +627,32 @@
       "data": 2018,
       "translator": [],
       "author": "",
-      "comments": [],
+      "comments": [
+        {
+          "author": "greenchay16@gmail.com",
+          "comment": "rnke",
+          "like": 0,
+          "disLike": 0
+        },
+        {
+          "author": "greenchay16@gmail.com",
+          "comment": "eirnier",
+          "like": 0,
+          "disLike": 0
+        },
+        {
+          "author": "greenchay16@gmail.com",
+          "comment": "repjopre",
+          "like": 0,
+          "disLike": 0
+        },
+        {
+          "author": "greenchay16@gmail.com",
+          "comment": "eniw",
+          "like": 0,
+          "disLike": 0
+        }
+      ],
       "genres": [
         "Боевик",
         "Боевые искусства",

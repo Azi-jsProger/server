@@ -11,7 +11,7 @@ const CatalogList = ({ manga, render, className }: TCatalogListProps) => {
 
     return (
             <ul className={className}>
-                {manga.map((item) => <li>{render(item)}</li>)}
+                {manga.map((item) => <>{render(item)}</>)}
             </ul>
     );
 };
