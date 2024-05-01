@@ -51,7 +51,7 @@ const MangaTops = () => {
             </div>
             <div className={classNames(cls.listForMangas)}>
                 {dbManga.map((mangaItem, id) =>
-                    <Link to={`/manga/${mangaItem.id}`}>
+                    <Link to={`/manga/${mangaItem._id}`}>
                     <MangaBlockCard
                         key={id}
                         id={id +1}

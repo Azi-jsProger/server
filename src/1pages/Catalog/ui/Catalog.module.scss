@@ -1,21 +1,26 @@
 .main {
+  margin-top: 56px;
   position: relative;
   width: 100vw;
   display: flex;
   flex-direction: column;
   z-index: 1;
+  box-sizing: border-box;
+  padding: 0 10.9375% 0 10.9375%;
 
-  @media (min-width: 1024px) {
-    padding: 0 10.9375% 0 10.9375%;
-    width: 80vw;
+
+  @media (max-width: 1024px) {
+    width: 100vw;
   }
 
   @media (max-width: 1024px) {
     padding: 0 10px 0 10px ;
+    width: 100vw;
   }
 
   @media (max-width: 600px) {
-    width: 100%;
+    //box-sizing: border-box;
+    width: 100vw;
     padding: 0 10px 0 10px;
   }
 
@@ -23,20 +28,11 @@
     padding: 0 0 10px 0;
 
     .boxTitleAndBurgerMenu {
-      width: 97vw;
+      width: 100%;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-
-
-      .title {
-        font-weight: 500;
-        font-family: "Exo 2", sans-serif;
-        font-size: 2.2rem;
-        line-height: 1.2;
-        margin: 16px 0 8px 0;
-      }
 
       .filteredBurgerMenu {
         display: none;
@@ -114,11 +110,18 @@
     flex-wrap: wrap;
     align-items: stretch;
     align-content: stretch;
-    justify-content: flex-start;
-    gap: 8px;
+    justify-content: start;
+    //gap: 8px;
+
+
     
+    @media (min-width: 601px) {
+      padding: 0 20px 16px 10px;
+    }
     @media (max-width: 600px) {
+
       width: 100vw;
+      //gap: 1%;
     }
   }
 
@@ -127,7 +130,7 @@
     @media (max-width: 600px) {
       position: fixed;
       right: 0;
-      top: 0;
+      top: 6%;
       width: 85vw;
       height: 120vh;
       background-color: #171717;
@@ -137,6 +140,7 @@
   }
 
   .fon {
+
   }
 
   .fonActive {
@@ -151,21 +155,27 @@
   }
 
   .CatalogSelectorsInpTransform {
-    transition: all ease 570ms;
+    transition: transform ease 570ms;
     transform: translateX(0);
+    display: flex;
+    justify-content: center;
   }
 
   .selectorsInp {
-    width: 90%;
+    box-sizing: border-box;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
     gap: 20px;
     padding: 12px 0 24px 0;
 
     @media (min-width: 600px) {
       transform: translateY(-13%);
     }
+    @media (max-width: 600px) {
+      width: 90%;
+    }
+
 
     .boxInp {
       display: flex;
@@ -173,18 +183,28 @@
       gap: 7px;
 
       .boxTitle {
+        width: 97%;
         padding: 0 5px 0 5px;
+        height: 20px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         margin-top: 8px;
         margin-bottom: 8px;
 
         .reset {
+          padding: 5px;
           font-size: 12px;
+          .X {
+            font-size: 14px;
+            margin-left: 5px;
+          }
         }
       }
 
       .wrapperInpMini {
+        box-sizing: border-box;
+        width: 100%;
         display: flex;
         gap: 10px;
 
@@ -203,14 +223,15 @@
       }
 
       .input {
+        box-sizing: border-box;
         border: none;
         outline: none;
         color: white;
         font-weight: 700;
         background-color: #1d1d1e;
-        width: 95.5%;
+        width: 100%;
         border-radius: 16px;
-        height: 30px;
+        height: 43px;
         padding: 6px 10px 7px 10px;
         min-width: 0;
         -webkit-tap-highlight-color: transparent;
@@ -282,42 +303,47 @@
 }
 
 .element {
+
+  @media (min-width: 1025px) {
+    width: 20%;
+    height: 22vw;
+  }
   @media (min-width: 999px) and (max-width: 1024px) {
-    width: 19%;
-    height: 50%;
+    width: 20%;
+    height: 30vw;
   }
   @media (min-width: 860px) and (max-width: 999px) {
-    width: 23.9%;
-    height: 50%;
+    width: 25%;
+    height: 34vw;
   }
 
   @media (min-width: 718px) and (max-width: 860px) {
-    width: 32.1%;
+    width: 33.33%;
     height: 39%;
   }
 
   @media (min-width: 601px) and (max-width: 718px) {
-    width: 48.5%;
+    width: 50%;
     height: 25%;
   }
 
   @media (max-width: 600px) {
-    width: 18vw;
+    width: 20%;
     height: 40vw;
   }
 
   @media (max-width: 570px) {
-    width: 23vw;
-    height: 45vw;
+    width: 25%;
+    height: 50vw;
   }
 
   @media (max-width: 472px) {
-    width: 30.7vw;
+    width: 33.33%;
     height: 70.5vw;
   }
 
   @media (max-width: 372px) {
-    width: 46vw;
+    width: 50%;
     height: 89vw;
   }
 }
@@ -357,4 +383,44 @@
   @media (max-width: 372px) {
     height: 100%;
   }
+}
+
+.filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-family: "Exo 2", sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
+  //margin: 16px 0 8px 0;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-family: "Exo 2", sans-serif;
+  line-height: 1.2 ;
+  font-size: 2.2rem;;
+  margin: 16px 0 16px 0;
+}
+
+.resetBtn {
+  border-radius: 8px;
+  padding: 3px;
+  transition: background-color 300ms;
+  border: none;
+  background-color: transparent;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    transition: background-color 700ms;
+    background-color: #323232;
+  }
+
 }

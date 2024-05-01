@@ -1,8 +1,11 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useCallback} from 'react';
 import { useNavigate} from "react-router-dom";
 
 import cls from "./Login.module.scss";
 import {AppContext} from "../../../0app/providers/StoreProvider/Provider";
+import axios, {AxiosResponse} from "axios";
+import {AuthResponse} from "../../../0app/providers/StoreProvider/models/responce/AuthResponse";
+import {API_URL} from "../../../5shered/api";
 
 type TLoginProps = {
     setHandleModeAuth: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,8 +14,7 @@ type TLoginProps = {
 
 const Login = (props: TLoginProps) => {
     const { setHandleModeAuth, setReg } = props
-    const navigate = useNavigate()
-    const { loginUser } = useContext(AppContext)
+    const { login } = useContext(AppContext)
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
@@ -24,15 +26,12 @@ const Login = (props: TLoginProps) => {
         setPassword(e.target.value);
     };
 
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement> | any) => {
+    const onSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement> | any) => {
         console.log('onSubmit')
         e.preventDefault();
-            loginUser?.(email, password, Navigate, toggleReg)
-    };
+            login?.(email, password, toggleReg)
 
-    const Navigate = () => {
-        navigate("/")
-    }
+    }, [email, password]);
 
     const toggleReg = () => {
         setReg(prev => !prev)
@@ -65,7 +64,7 @@ const Login = (props: TLoginProps) => {
                 <div className={cls.forGotPassword}>
                     {/*<span>Забыли пароль??</span>*/}
                 </div>
-                <div>
+                <div className={cls.boxInp}>
                     <button className={cls.button} onClick={onSubmit}>Войти</button>
                 </div>
                 <div className={cls.boxZaRegistr}>

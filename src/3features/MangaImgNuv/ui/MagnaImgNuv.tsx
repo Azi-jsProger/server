@@ -1,20 +1,24 @@
 import React from 'react';
-import {classNames} from "../../../../5shered/styleFunction/classNameFn";
-import cls from "../../ui/MangaDescriptionContent.module.scss";
-import Button from "../../../../5shered/ui/button";
-import {IPropsForTManga} from "../../../../5shered/types/types";
+import {classNames} from "../../../5shered/styleFunction/classNameFn";
+import cls from "./MangaImgNuv.module.scss"
+import Button from "../../../5shered/ui/button";
+import {IPropsForTManga} from "../../../5shered/types/types";
 import {Link} from "react-router-dom";
-import {LocalStorageUserLastChapter} from "../../../../5shered/consts/localStorageUserGlava";
+import {LocalStorageUserLastChapter} from "../../../5shered/consts/localStorageUserGlava";
 import {RiArrowDropDownLine} from "react-icons/ri";
 import { PiBookmarkSimpleLight } from "react-icons/pi";
 
-const CardMagnaBoxForImgNuv = ({ oneManga }:IPropsForTManga) => {
+type TProps = {
+    itemId: string
+}
+
+const MagnaImgNuv = ({ oneManga, itemId }:IPropsForTManga & TProps) => {
     const lastChapter = localStorage.getItem(`${LocalStorageUserLastChapter}${oneManga?.name}`) || 0
 
     return (
         <div className={cls.mangaContainer}>
             {oneManga && (
-                <div>
+                <div className={cls.wrapperBoxImg}>
                     {/* Картинка и кнопка чтения и добавления в закладки */}
                     <div className={cls.boxImg}>
                         {/* Для скелетона, когда картинка грузится долго */}
@@ -37,7 +41,7 @@ const CardMagnaBoxForImgNuv = ({ oneManga }:IPropsForTManga) => {
                     <div className={classNames(cls.boxForButton)}>
                         {oneManga.chaptersLists && oneManga.chaptersLists.length ? (
                             <Link
-                                to={`${lastChapter}`}
+                                to={`/mangaContent/${itemId}/${lastChapter}`}
                                 className={classNames(cls.buttonA)}
                             >
                                 {lastChapter ? `Продолжить с ${lastChapter}-главы` : "Читать"}
@@ -64,4 +68,4 @@ const CardMagnaBoxForImgNuv = ({ oneManga }:IPropsForTManga) => {
     );
 };
 
-export default CardMagnaBoxForImgNuv;
+export default MagnaImgNuv;

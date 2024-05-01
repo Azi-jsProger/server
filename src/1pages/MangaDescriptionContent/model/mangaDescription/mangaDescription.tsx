@@ -40,7 +40,7 @@ const MangaDescription = ({oneManga, desc} : IPropsForTManga) => {
                     :
                     <ul className={cls.ul}>
                         {oneManga?.chaptersLists && oneManga?.chaptersLists.map((card, id) =>
-                            <Link to={`${id}`} key={id}>
+                            <Link to={`/mangaContent/${oneManga._id}/${id}/${oneManga.chapters && oneManga.chapters - 1}`} key={id} className={cls.a}>
                                 <div className={cls.Li}>
                                     <div className={cls.LiElementMobileLeft}>
                                         <div className={cls.idTranslator}>

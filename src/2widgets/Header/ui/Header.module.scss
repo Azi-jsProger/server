@@ -4,10 +4,13 @@
   background-color: #171717;
   display: flex;
   justify-content: center;
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
 
   .nav {
-    width: 90vw;
+    width: 95vw;
     margin: 0 0 auto;
     height: 100%;
     display: flex;
@@ -20,8 +23,8 @@
       gap: 15px;
 
       .logo {
-        width: 45px;
-        height: 45px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
       }
 
@@ -85,4 +88,9 @@
       }
     }
   }
+}
+
+.isCollapsed {
+  transition: transform 600ms;
+  transform: translateY(-300%);
 }

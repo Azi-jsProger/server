@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import cls from './Create.module.scss';
 import axios from 'axios';
 import { classicMangaGenres } from '../module/consts/geners';
-import {API_URL} from "../../../5shered/api/api";
+import {API_URL} from "../../../5shered/api";
 
 const Create = () => {
     const [selectedImage, setSelectedImage] = useState<File | null>(null);

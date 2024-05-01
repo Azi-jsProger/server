@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, {useCallback, useContext, useState} from 'react';
 import cls from "./Registration.module.scss";
+import {AppContext} from "../../../0app/providers/StoreProvider/Provider";
 
 type TRegistrationProps = {
     setHandleModeAuth: React.Dispatch<React.SetStateAction<boolean>>;
@@ -7,31 +8,42 @@ type TRegistrationProps = {
 }
 
 const Registration = (props: TRegistrationProps) => {
-    const { setHandleModeAuth } = props
+    const { registration } = useContext(AppContext)
+    const { setHandleModeAuth, setReg } = props
     const [inputValue, setInputValue] = useState({
         email: '',
         password: '',
         passwordRepetition:'',
-        username: '',
+        name: '',
     });
+
+    const onSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement> | any) => {
+        console.log('onSubmit')
+        e.preventDefault();
+        registration?.(inputValue.name,inputValue.email, inputValue.password, toggleReg)
+    }, [inputValue]);
+
+    const toggleReg = () => {
+        setReg(prev => !prev)
+    }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
-        const { id } = e.currentTarget;
-        setInputValue(prevState => ({...prevState, [id]: value}));};
+        const id = e.currentTarget.id;
+        setInputValue(prev => ({...prev, [id]: value}));};
 
     const HandleModeAuth = () => {
         setHandleModeAuth(prev => !prev)
     }
 
     return (
-        <form className={cls.form}>
+        <form className={cls.form} onSubmit={onSubmit}>
             <h5 className={cls.title}>Зарегистрировать аккаунт</h5>
             <div className={cls.boxInp}>
                 <input
-                    placeholder="*Никнейм" value={inputValue.username}
+                    placeholder="*Никнейм" value={inputValue.name}
                     className={cls.input} onChange={handleChange}
-                    id="username"
+                    id="name"
                 />
                 <input
                     placeholder="*Почта" value={inputValue.email}
@@ -44,7 +56,7 @@ const Registration = (props: TRegistrationProps) => {
                     id="password" type="password"
                 />
                 <input
-                    placeholder="*Пороль еще раз" value={inputValue.password}
+                    placeholder="*Пороль еще раз" value={inputValue.passwordRepetition}
                     className={cls.input} onChange={handleChange}
                     id="passwordRepetition" type="password"
                 />
@@ -56,7 +68,7 @@ const Registration = (props: TRegistrationProps) => {
                 </span>
             </div>
             <div>
-                <button className={cls.button}>РЕГИСТРАЦИЯ</button>
+                <button className={cls.button} onClick={onSubmit}>РЕГИСТРАЦИЯ</button>
             </div>
             <div className={cls.boxZaRegistr}>
                 <span>Уже есть аккаунт?</span>

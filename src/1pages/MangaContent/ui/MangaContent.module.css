@@ -1,0 +1,25 @@
+.loader {
+  width: 100vw;
+  height: 150vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.main .skelet {
+  position: fixed;
+  background-color: #121212;
+  width: 100vw;
+  height: 100vh;
+}
+.main .skeleton {
+  transition: background-color 700ms;
+  background-color: transparent;
+}
+
+/*# sourceMappingURL=MangaContent.module.css.map */

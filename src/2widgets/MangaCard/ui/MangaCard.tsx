@@ -4,36 +4,44 @@ import { classNames } from "../../../5shered/styleFunction/classNameFn";
 import {Link} from "react-router-dom";
 import {TManga} from "../../../5shered/types/MangaTypes";
 
-interface StyleProps {
+interface IPropsMangaCard {
     width?: string;
     height?: string;
     element?: string;
     wrapperForImg?: string;
     img?: string
+    onClick?: () => void
+    manga?: TManga
 }
 
-const MangaCard = (props: TManga & StyleProps) => {
+const MangaCard = (props: IPropsMangaCard ) => {
 
-    const { id, photo, name, category, rating, width, height, element, wrapperForImg, img } = props
+    const { manga, width, height, element, wrapperForImg, img, onClick } = props
+
+    const ratingNumber = manga?.rating &&  manga?.rating?.total / manga?.rating?.people
+    const ratingString = ratingNumber+""
 
     return (
-        <div className={classNames(cls.element, {}, [element])} style={{width:width, height:height}}>
-            <Link to={`/manga/${id}`}>
+        <div className={classNames(cls.element, {}, [element])} style={{width:width, height:height}} onClick={onClick}>
+            <Link to={`/manga/${manga?._id}`}>
                 <div className={classNames(cls.curd)}>
                     <div className={classNames(cls.wrapperForImg, {}, [wrapperForImg])} style={{width:width, height:"75%"}}>
                         <img
                             className={classNames(cls.img, {}, [img])}
-                            src={photo}
+                            src={manga?.photo}
                             alt={"Технические шоколадки"}
                         />
                     </div>
-                    <p className={cls.category}>{category} <span className={classNames(cls.rating)}> {rating}</span> <span
-                        className={classNames(cls.z)}>★</span></p>
-                    <h5 className={cls.name}>{name}</h5>
+                    <div className={cls.description}>
+                        <p className={cls.category}>{manga?.category} <span
+                            className={classNames(cls.rating)}> {ratingString.slice(0,4)}</span> <span
+                            className={classNames(cls.z)}>★</span></p>
+                        <h5 className={cls.name}>{manga?.name}</h5>
+                    </div>
                 </div>
             </Link>
         </div>
-);
+    );
 };
 
 export default MangaCard;

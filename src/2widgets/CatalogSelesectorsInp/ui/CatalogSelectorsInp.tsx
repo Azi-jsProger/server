@@ -57,10 +57,11 @@ const CatalogSelectorsInp = (props:i) => {
                 return true
             }else if (manga.data + "" >= textInput.releaseYearFrom && manga.data + "" <= textInput.releaseYearTo) {
                 return true
-            }else if (manga.rating === textInput.ratingFrom) {
-                return true
-            }else if (manga.rating === textInput.ratingTo) {
-                return true
+            }else if (manga && manga.rating && manga.rating.total && manga.rating.people) {
+                const ratingValue = manga.rating.total / manga.rating.people;
+                if (ratingValue <= textInput.ratingFrom && ratingValue >= textInput.ratingTo) {
+                    return true;
+                }
             }else {
                 return false
             }
@@ -80,8 +81,22 @@ const CatalogSelectorsInp = (props:i) => {
         <div className={cls.selectorsInp}>
             <div className={cls.boxInp}>
                 <div className={cls.boxTitle}>
-                    <span className={cls.title}>Фильтры</span>
-                    <span className={cls.reset}>ОЧИСТИТЬ</span>
+                    <span className={cls.filter}>Фильтры</span>
+                    <button
+                        className={cls.resetBtn}
+                        onClick={() => setTextInput({
+                            types: "",
+                            genres: "",
+                            projectStatus: "",
+                            ageRating: "",
+                            releaseYearFrom: "",
+                            releaseYearTo: "",
+                            ratingFrom: 0,
+                            ratingTo: 0
+                        })}
+                    >
+                        <span className={cls.reset}>ОЧИСТИТЬ <span className={cls.X}>X</span></span>
+                    </button>
                 </div>
                 <div className={cls.firstInputs}>
                     <input className={cls.input} placeholder={"Типы"} id={"types"} onChange={handleInputChange}/>

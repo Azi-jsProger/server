@@ -1,27 +1,30 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 import React, { createContext, useCallback, useReducer, Dispatch } from 'react';
 
 import initialState from "./initialState";
 import reducer from "./reducer";
 import {TManga} from "../../../5shered/types/MangaTypes";
-import {API_URL} from "../../../5shered/api/api";
-
+import {API_URL} from "../../../5shered/api";
+import {AuthResponse} from "./models/responce/AuthResponse";
+import {AuthService} from "./service";
 
 export type TContextProps = {
     dispatch?: Dispatch<{type: string, payload?:any}>;
     getData?: () => Promise<void>;
     getOneManga?: (id : string | number) => Promise<void>;
+    resetOneManga?: () => Promise<void>;
     addComment?: (newComment: { author:string,comment:string,like:number,disLike:number },id: string | number, clearForm :() => void,oneManga: TManga) => Promise<void>
-    regUser?: (email: string, password: string, Navigate: () => void) => Promise<void>;
-    loginUser?: (email: string, password: string, Navigate: () => void, toggleReg: () => void) => Promise<void | string | undefined>;
-    fastLoginUser?: (email: string, password: string) => Promise<void | string | undefined>;
-    checkEmail?: (email: string) => Promise<void | string | undefined>;
+    login?: (email: string, password: string, toggleReg: () => void) => Promise<AxiosResponse<AuthResponse>> | any
+    registration?: (name: string,email:string, password: string, toggleReg: () => void) => Promise<AxiosResponse<AuthResponse>> | any
+    logout?: () => Promise<void> | any
+    checkAuth?: () => void
 }
 
 export type TInitialState = {
     manga: TManga[];
     loading: boolean;
     error: any;
+    isAuth:boolean;
     oneManga: TManga
     user: {
         email: string;
@@ -33,13 +36,7 @@ export type TInitialState = {
 }
 
 type user = {
-    email: string,
-    password:  string,
-    id: number
-}
-
-interface users {
-    users: user[]
+    token: string
 }
 
 export const AppContext = createContext<TInitialState & TContextProps>(initialState);
@@ -50,13 +47,15 @@ const Provider = ({ children }: React.PropsWithChildren) => {
     const getData = useCallback(async () => {
         try {
             dispatch({ type: "getRequest" });
-            const { data } = await axios.get(`${API_URL}/manga/?format=json`);
+            const { data } = await axios.get(`${API_URL}/manga`);
+            console.log(data)
             dispatch({ type: "getSuccess", payload: data});
         } catch (error) {
             dispatch({ type: "getFailure", payload: error });
         }
     }, []);
-    const getOneManga = useCallback(async (id: number | string) => {
+
+    const getOneManga = (async (id: number | string) => {
         try {
             dispatch({ type: "getRequestOneManga" });
             const { data } = await axios.get(`${API_URL}/manga/${id}/`);
@@ -64,101 +63,92 @@ const Provider = ({ children }: React.PropsWithChildren) => {
         } catch (error) {
             dispatch({ type: "getFailureOneManga", payload: error });
         }
-    }, []);
+    });
+
+    const resetOneManga = (async () => {
+        try {
+            dispatch({ type: "resetRequestOneManga" });
+            dispatch({ type: "resetSuccessOneManga", payload: {}});
+        } catch (error) {
+            dispatch({ type: "resetFailureOneManga", payload: error });
+        }
+    });
 
     const addComment = useCallback(async (newComment: { author:string,comment:string,like:number,disLike:number }, id: number | string, clearForm: () => void, oneManga:TManga) => {
         try {
-            dispatch?.({ type: "addCommentRequest" });
+            dispatch({ type: "addCommentRequest" });
             const { data: mangaItem } = await axios.get(`${API_URL}/manga/${id}`);
             mangaItem.comments.push(newComment);
             console.log(mangaItem, "addComment");
             await axios.put(`${API_URL}/manga/${id}`, mangaItem);
             clearForm();
-            dispatch?.({ type: "addCommentSuccess", payload:newComment });
+            dispatch({ type: "addCommentSuccess", payload:newComment });
         } catch (error) {
-            dispatch?.({ type: "addCommentFailure", payload: error });
+            dispatch({ type: "addCommentFailure", payload: error });
         }
     }, []);
 
-    const checkEmail = useCallback(async (email: string) => {
+    const login = useCallback(async (email: string, password: string, toggleReg: () => void) => {
         try {
-            const { data: users } =  await axios.get(`${API_URL}/users`)
-            return users.find((user : user) => user.email === email)
+            dispatch({ type: "loginUserRequest" })
+            const response = await AuthService.login(email, password)
+            localStorage.setItem("token", response.data.accessToken)
+            dispatch({ type: "loginUserSuccess" , payload: response.data.user })
+            toggleReg()
         } catch (error) {
-            console.log(error)
-        }
-    },[])
-
-    const regUser = useCallback(async (email: string, password: string, Navigate: () => void) => {
-        try {
-            const newUser = {
-                email: email,
-                password: password,
-                favoriteMangas: []
-            }
-            const { data } = await axios.post(`${API_URL}/users`, newUser);
-            dispatch({ type: "registerUser", payload: data});
-            localStorage.setItem("user", JSON.stringify(newUser))
-            Navigate()
-        } catch (error) {
-            dispatch({ type: "getFailure", payload: error });
+            dispatch({ type: "loginUserFailure" , payload: {error}})
         }
     }, []);
 
-
-    const loginUser = useCallback(async (email: string, password: string, Navigate: () => void, toggleReg: () => void) => {
+    const registration = useCallback(async (name: string,email: string, password: string, toggleReg: () => void) => {
         try {
-            const { data: users } = await axios.get(`${API_URL}/users`);
-
-            const user: users = users.find((user : user) => user.email === email && user.password === password)
-
-            if (user) {
-                toggleReg();
-                Navigate();
-                localStorage.setItem("user", JSON.stringify({email: email,password:password}))
-            } else {
-                return "Проверьте Email на наличие ошибок или пароль";
-            }
-
-            dispatch({ type: "registerUser", payload: user });
+            dispatch({ type: "registerUserRequest" })
+            const response = await AuthService.registration(email, password, name)
+            localStorage.setItem("token", response.data.accessToken)
+            dispatch({ type: "registerUserSuccess" , payload: response.data.user })
+            toggleReg()
         } catch (error) {
-            dispatch({ type: "getFailure", payload: error });
+            dispatch({ type: "registerUserFailure" , payload: {error}})
         }
     }, []);
 
-    const fastLoginUser = useCallback(async (email: string, password: string) => {
+    const logout = useCallback(() => {
         try {
-            const { data: users } = await axios.get(`${API_URL}/users`);
-
-            const user: users = users.find((user : user) => user.email === email && user.password === password)
-
-            if (user) {
-                console.log("OK USER")
-            } else {
-                return "не балуйся с локалСтореж";
-            }
-
-            dispatch({ type: "registerUser", payload: user });
+            dispatch({ type: "logoutUserRequest" })
+            AuthService.logout?.()
+            localStorage.removeItem("token")
+            dispatch({ type: "logoutUserSuccess" })
         } catch (error) {
-            dispatch({ type: "getFailure", payload: error });
+            dispatch({ type: "logoutUserFailure" , payload: {error}})
         }
     }, []);
 
-    // create post request send data with formData
+    const checkAuth = useCallback(async () => {
+        try {
+            dispatch({ type: "loginUserRequest" })
+            const response = await axios.get(`${API_URL}/auth/refresh`, {withCredentials: true})
+            localStorage.setItem("token", response.data.accessToken)
+            dispatch({ type: "loginUserSuccess" , payload: response.data.user })
+        } catch (error) {
+            dispatch({ type: "loginUserFailure" , payload: {error}})
+        }
+    }, []);
 
     const value: TInitialState & TContextProps = {
         manga: state.manga,
         loading: state.loading,
         error: state.error,
+        isAuth: state.isAuth,
         oneManga: state.oneManga,
         user: state.user,
         addComment,
         getData,
+        login,
+        registration,
+        logout,
+        checkAuth,
         getOneManga,
-        regUser,
-        loginUser,
-        fastLoginUser,
-        checkEmail,
+        resetOneManga,
         dispatch
     };
 

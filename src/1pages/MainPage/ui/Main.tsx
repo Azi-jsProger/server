@@ -1,25 +1,44 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useCallback, useContext, useEffect} from 'react';
 import cls from "./Main.module.scss"
 import {classNames} from "../../../5shered/styleFunction/classNameFn";
 import {AppContext} from "../../../0app/providers/StoreProvider/Provider";
 import {MangaCard} from "../../../2widgets/MangaCard";
 import {Link} from "react-router-dom";
-import axios from "axios";
-import {API_URL} from "../../../5shered/api/api";
+import {lastPage} from "../../../5shered/consts/lastPage";
 
 const Main = () => {
     const { manga, getData } = useContext(AppContext)
 
-
-
     useEffect(() => {
+        const lastPageFromStorage = sessionStorage.getItem(lastPage);
+        const scrollPosition: any = sessionStorage.getItem("main");
+
+        if (lastPageFromStorage === 'MangaDescriptionContent') {
+            const scr = JSON.parse(scrollPosition)
+            if (scr) {
+                const { x, y } = scr
+                window.scrollTo(x, y);
+                console.log(x, y)
+            }
+
+
+        } else {
+            window.scrollTo(0, 0)
+            console.log(0, 0)
+        }
         getData?.()
     },[])
 
-
+    useEffect(() => {
+        return () => {
+            const dataSave = {x: window.screenX, y: window.scrollY}
+            sessionStorage.setItem(lastPage, "main")
+            sessionStorage.setItem("main", JSON.stringify(dataSave))
+        }
+    }, []);
 
     return (
-        <div>
+        <div style={{marginTop: "56px"}}>
             <div className={cls.nuvBar}>
                 <Link to={'/manga/Catalog'} className={cls.catalog}>
                     КАТАЛОГ
@@ -33,16 +52,12 @@ const Main = () => {
             </div>
             <div className={classNames(cls.boxScroll)}>
                 {
-                    manga.map(manga =>
+                    manga.map((manga, index) =>
                         <MangaCard
                             width={"128px"}
                             height={"280px"}
-                            key={manga.id}
-                            id={manga.id}
-                            photo={manga.photo}
-                            category={manga.category}
-                            name={manga.name}
-                            rating={manga.rating}
+                            key={index}
+                            manga={manga}
                         />
                     )
                 }
@@ -52,23 +67,18 @@ const Main = () => {
                     <div className={classNames(cls.wrapperScroll)}>
                         <div className={classNames(cls.wrapperForNovelt)}>
                             {
-                                manga.map(manga =>
+                                manga.map((manga, index) =>
                                     <MangaCard
                                         width={"128px"}
                                         height={"280px"}
-                                        key={manga.id}
-                                        id={manga.id}
-                                        photo={manga.photo}
-                                        category={manga.category}
-                                        name={manga.name}
-                                        rating={manga.rating}
+                                        key={index}
+                                        manga={manga}
                                     />
                                 )
                             }
                         </div>
                     </div>
             </div>
-
         </div>
     );
 };

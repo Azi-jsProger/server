@@ -1,17 +1,20 @@
 @import "../../../main.module";
 
 .box {
-  max-width: 1300px;
-  height: auto;
-  padding: 20px 50px 0 50px;
+  width: 100vw;
+  padding: 24px 64px;
   display: flex;
   justify-content: center;
   font-family: "Exo 2", sans-serif;
+  box-sizing: border-box;
 
 
   @media (max-width: 600px) {
     display: block;
     padding: 0;
+  }
+  @media (min-width: 601px) {
+    padding: 76px 50px 0 50px;
   }
 
   .boxForOtherNames {
@@ -77,7 +80,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      backdrop-filter: blur(10px); /* Размытие заднего фона */
+      backdrop-filter: blur(5px);
       z-index: -3;
     }
 
@@ -97,89 +100,94 @@
   }
 
 
-  .boxForButton {
-    display: flex;
-    flex-direction: column;
-
-    @media (max-width: 600px) {
-      justify-content: center;
-      flex-direction: row;
-      align-items: center;
-      position: fixed;
-      bottom: 0;
-      left: 10%;
-      gap: 40px;
-      z-index: 10;
-    }
-
-    .buttonA {
-      background-color: #1976d2;
-      border-radius: 8px;
-      text-decoration: none;
-      width: 250px;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 15px 0 15px;
-
-      @media (max-width: 600px) {
-        border-radius: 24px;
-        height: 50px;
-      }
-    }
-
-    .buttonZakladkaDesktop {
-      display: block;
-      width: 250px;
-      height: 40px;
-      border-radius: 8px;
-      border: none;
-      background-color: #1976d2;
-      color: white;
-
-
-      @media (max-width: 600px) {
-        display: none;
-      }
-
-    }
-    .buttonZakladkaMobile {
-      display: none;
-      width: 60px;
-      height: 50px;
-      border-radius: 24px;
-      border: none;
-      background-color: #1976d2;
-      color: white;
-
-      @media (max-width: 600px) {
-      display: block;
-      }
-    }
-
-    .buttonNoneChapter {
-      width: 250px;
-      height: 40px;
-      border-radius: 8px;
-      border: none;
-      background-color: #374a5c;
-      color: white;
-      margin-bottom: 15px;
-      margin-top: 15px;
-      cursor: no-drop;
-      font-size: 16px;
-
-      @media (max-width: 600px) {
-        border-radius: 24px;
-        height: 50px;
-
-      }
-    }
-
-
-
-  }
+  //.boxForButton {
+  //  display: flex;
+  //  flex-direction: column;
+  //
+  //  @media (max-width: 600px) {
+  //    background-color: transparent;
+  //    height: 0;
+  //    justify-content: center;
+  //    flex-direction: row;
+  //    align-items: center;
+  //    position: sticky;
+  //    bottom: 60px;
+  //    left: 10%;
+  //    gap: 40px;
+  //    z-index: 10;
+  //  }
+  //  @media (min-width: 601px) {
+  //    display: none;
+  //  }
+  //
+  //  .buttonA {
+  //    background-color: #1976d2;
+  //    border-radius: 8px;
+  //    text-decoration: none;
+  //    width: 250px;
+  //    height: 40px;
+  //    display: flex;
+  //    justify-content: center;
+  //    align-items: center;
+  //    margin: 15px 0 15px;
+  //
+  //    @media (max-width: 600px) {
+  //      border-radius: 24px;
+  //      height: 50px;
+  //    }
+  //  }
+  //
+  //  .buttonZakladkaDesktop {
+  //    display: block;
+  //    width: 250px;
+  //    height: 40px;
+  //    border-radius: 8px;
+  //    border: none;
+  //    background-color: #1976d2;
+  //    color: white;
+  //
+  //
+  //    @media (max-width: 600px) {
+  //      display: none;
+  //    }
+  //
+  //  }
+  //  .buttonZakladkaMobile {
+  //    display: none;
+  //    width: 60px;
+  //    height: 50px;
+  //    border-radius: 24px;
+  //    border: none;
+  //    background-color: #1976d2;
+  //    color: white;
+  //
+  //    @media (max-width: 600px) {
+  //      display: block;
+  //    }
+  //  }
+  //
+  //  .buttonNoneChapter {
+  //    width: 250px;
+  //    height: 40px;
+  //    border-radius: 8px;
+  //    border: none;
+  //    background-color: #374a5c;
+  //    color: white;
+  //    margin-bottom: 15px;
+  //    margin-top: 15px;
+  //    cursor: no-drop;
+  //    font-size: 16px;
+  //
+  //    @media (max-width: 600px) {
+  //      border-radius: 24px;
+  //      height: 50px;
+  //
+  //    }
+  //  }
+  //
+  //
+  //
+  //}
 }
 
 .skyliton {
@@ -191,6 +199,7 @@
 }
 
 .boxForDescriptionOfContent {
+  position: relative;
   margin: -1vw 50px 0 50px;
   padding-top: 20px;
   height: auto;
@@ -263,12 +272,25 @@
     @media (max-width: 600px) {
       width: 100vw;
       gap: 0;
-      justify-content: center;
+      justify-content: space-around;
       border-bottom: none;
     }
 
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .titleElementMobile {
+      @media (min-width: 600px) {
+        display: none;
+      }
+      display: block;
+
+    }
+
     .elementRating {
-      margin-right: 40px;
       text-align: center;
       font-size: 17px;
     }
@@ -325,6 +347,7 @@
     padding-left: 20px;
     border-radius: 30px 30px 0 0;
     background-color: #171717;
+    box-sizing: border-box;
   }
 
   .boxforbtn {
@@ -441,15 +464,18 @@
 
 .ul {
   width: 50vw;
+  overflow: hidden;
+
   @media (max-width: 600px) {
-    width: 100vw;
+    width: 100%;
+    height: 50vh;
 
   }
 
   .Li {
     position: relative;
     text-align: center;
-    width: 90%;
+    width: 95%;
     display: flex;
     justify-content: space-around;
     background-color: #1d1d1d;
@@ -462,7 +488,7 @@
     @include adaptiv-font(16, 14);
 
     @media (max-width: 600px) {
-        height: 60px;
+      height: 60px;
 
     }
     .LiElementDesktop {

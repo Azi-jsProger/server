@@ -26,7 +26,7 @@ export type AppRouteProps = RouteProps & {}
 export const RoutePaths: Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: "/",
     [AppRoutes.CARDMANGA]: "/manga/:itemId",
-    [AppRoutes.MANGACONTENT]: "/manga/:mangaId/:chapter",
+    [AppRoutes.MANGACONTENT]: "/mangaContent/:mangaId/:chapter/:number",
     [AppRoutes.MANGATOPS]: "/manga/mangaTops",
     [AppRoutes.CREATE]: "/manga/create",
     [AppRoutes.CATALOG]: "/manga/catalog",

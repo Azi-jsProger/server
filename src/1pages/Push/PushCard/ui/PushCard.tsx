@@ -46,7 +46,7 @@ const PushCard = () => {
     };
 
     return (
-        <div>
+        <div style={{marginTop: "56px"}}>
             <div>
                 <h1>Уведомления</h1>
                 {Object.keys(arr).map((category) => (

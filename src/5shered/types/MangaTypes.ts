@@ -1,12 +1,15 @@
 export type TManga = {
     manga4?:boolean;
     id?:number;
+    _id?:string | number;
     photo?: string;
-    link?: string;
     name?: string;
     otherNames?: string[];
-    status?:number;
-    rating?: number;
+    status?: string;
+    rating?: {
+        total: number,
+        people: number
+    };
     like?: number;
     views?: number;
     tabs?: number;

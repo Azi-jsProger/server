@@ -18,6 +18,14 @@ const Catalog = () => {
     const [ifCollapsed, setIsCollapsed] = useState<boolean>(false)
 
     useEffect(() => {
+        if (ifCollapsed) {
+            document.body.style.overflow = "hidden"
+        } else {
+            document.body.style.overflow = ""
+        }
+    }, [ifCollapsed]);
+
+    useEffect(() => {
         getData?.()
     }, []);
 
@@ -135,11 +143,7 @@ const Catalog = () => {
                             img={cls.img}
                             wrapperForImg={cls.wrapperForImg}
                             element={cls.element}
-                            id={filteredManga.id}
-                            photo={filteredManga.photo}
-                            name={filteredManga.name}
-                            category={filteredManga.category}
-                            rating={filteredManga.rating}
+                            manga={filteredManga}
                         />
                     )}
                 />

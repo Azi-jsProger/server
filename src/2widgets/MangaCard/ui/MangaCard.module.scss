@@ -4,6 +4,8 @@
   height: 280px;
   font-size: 0.9rem;
   overflow: hidden;
+  padding: 4px;
+  box-sizing: border-box;
 
 }
 
@@ -13,6 +15,7 @@
 }
 
 .wrapperForImg {
+  height: 76.55%;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -23,6 +26,10 @@
     height: 100%;
     object-fit: cover;
   }
+}
+
+.description {
+  height: 23.45%;
 }
 
 .rating {
@@ -39,6 +46,8 @@
 }
 
 .name {
+  height: 20%;
+  -webkit-line-clamp: 2;
   color: white;
   font-weight: 700;
 
@@ -47,4 +56,5 @@
 .category {
   color: #a9a9a9;
   font-size: 12px;
+  margin: 4px 0
 }

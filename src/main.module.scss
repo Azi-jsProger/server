@@ -1,5 +1,9 @@
 $maxWidth: 1280;
 
+* {
+  //box-sizing: border-box;
+}
+
 @mixin adaptiv-font($pcSize, $mobSize) {
     $addSize: $pcSize - $mobSize;
     $addMobSize: $addSize + $addSize * 0.7;

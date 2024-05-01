@@ -13,6 +13,10 @@ const getRequestOneManga = "getRequestOneManga";
 const getSuccessOneManga = "getSuccessOneManga";
 const getFailureOneManga = "getFailureOneManga";
 
+const resetRequestOneManga =  "resetRequestOneManga";
+const resetSuccessOneManga =  "resetSuccessOneManga";
+const resetFailureOneManga =  "resetFailureOneManga";
+
 const addRequest = "addRequest";
 const addSuccess = "addSuccess";
 const addFailure = "addFailure";
@@ -21,7 +25,17 @@ const addCommentRequest = "addCommentRequest";
 const addCommentSuccess = "addCommentSuccess";
 const addCommentFailure = "addCommentFailure";
 
-const registerUser = "registerUser"
+const registerUserRequest = "registerUserRequest"
+const registerUserSuccess = "registerUserSuccess"
+const registerUserFailure = "registerUserFailure"
+
+const loginUserRequest = "loginUserRequest"
+const loginUserSuccess = "loginUserSuccess"
+const loginUserFailure = "loginUserFailure"
+
+const logoutUserRequest = "logoutUserRequest"
+const logoutUserSuccess = "logoutUserSuccess"
+const logoutUserFailure = "logoutUserFailure"
 
 export default (state : TInitialState & any, action : TAction) => {
     switch (action.type) {
@@ -64,6 +78,25 @@ export default (state : TInitialState & any, action : TAction) => {
                 error : action.payload,
                 loading : false
             };
+        }case resetRequestOneManga: {
+            return {
+                ...state,
+                loading: true
+            };
+        }
+        case resetSuccessOneManga: {
+            return {
+                ...state,
+                loading: false,
+                oneManga: action.payload
+            };
+        }
+        case resetFailureOneManga : {
+            return {
+                ...state,
+                error : action.payload,
+                loading : false
+            };
         }
         case addRequest: {
             return {
@@ -85,10 +118,67 @@ export default (state : TInitialState & any, action : TAction) => {
                 loading : false
             };
         }
-        case registerUser: {
+        case registerUserRequest: {
             return {
                 ...state,
-                user: action.payload
+                loading : true
+            }
+        }
+        case registerUserSuccess: {
+            return {
+                ...state,
+                isAuth: true,
+                user: action.payload,
+                loading : false
+            }
+        }
+        case registerUserFailure: {
+            return {
+                ...state,
+                error: action.payload,
+                loading : false
+            }
+        }
+        case loginUserRequest: {
+            return {
+                ...state,
+                loading : true
+            }
+        }
+        case loginUserSuccess: {
+            return {
+                ...state,
+                isAuth: true,
+                user: action.payload,
+                loading : false
+            }
+        }
+        case loginUserFailure: {
+            return {
+                ...state,
+                error: action.payload,
+                loading : false
+            }
+        }
+        case logoutUserRequest: {
+            return {
+                ...state,
+                loading : true
+            }
+        }
+        case logoutUserSuccess: {
+            return {
+                ...state,
+                isAuth: false,
+                user: {},
+                loading : false
+            }
+        }
+        case logoutUserFailure: {
+            return {
+                ...state,
+                error: action.payload,
+                loading : false
             }
         }
         case addCommentRequest : {

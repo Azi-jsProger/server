@@ -25,19 +25,20 @@
   flex-direction: column;
   gap: 15px;
 }
-.form .boxInp input {
+.form .boxInp .input {
   color: white;
   border: none;
-  width: 315px;
-  height: 30px;
+  width: 100%;
+  height: 50px;
   outline: none;
   padding: 10px;
   font-weight: 700;
   font-size: 15px;
   border-radius: 20px;
   background-color: #1f1f1f;
+  box-sizing: border-box;
 }
-.form .boxInp input::placeholder {
+.form .boxInp .input::placeholder {
   font-weight: 700;
   font-size: 14px;
 }
@@ -48,7 +49,7 @@
   font-size: 12px;
 }
 .form .button {
-  width: 335px;
+  width: 100%;
   height: 50px;
   border: none;
   color: white;
@@ -56,6 +57,7 @@
   font-weight: 700;
   border-radius: 20px;
   background-color: #1876d2;
+  cursor: pointer;
 }
 .form .boxZaRegistr {
   height: 40%;
@@ -67,6 +69,7 @@
 .form .boxZaRegistr .registr {
   color: #1976d2;
   font-weight: 700;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=Registration.module.css.map */

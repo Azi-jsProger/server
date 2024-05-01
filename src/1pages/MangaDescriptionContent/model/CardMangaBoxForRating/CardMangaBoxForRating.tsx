@@ -8,25 +8,40 @@ import {numberConverter} from "../../../../5shered";
 
 
 const CardMangaBoxForRating = ({oneManga}:IPropsForTManga) => {
+    const resultRating =  oneManga?.rating && oneManga?.rating?.total / oneManga?.rating?.people
+    const strResultRating = resultRating+''
+
     return (
         <div className={cls.boxForRating} >
-
-                    <span className={cls.elementRating}>
+            <div className={cls.wrapper}>
+                <div className={cls.titleElementMobile}>Рейтинг</div>
+                <span className={cls.elementRating}>
                         <IoStarSharp className={cls.star}/>
-                        <span className={cls.views}>{oneManga?.rating}</span>
+                        <span className={cls.views}>{strResultRating.slice(0, 4)}</span>
                     </span>
-            <span className={cls.elementRating}>
+            </div>
+            <div>
+                <div className={cls.titleElementMobile}>Лайков</div>
+                <span className={cls.elementRating}>
                         <FaHeart className={cls.heart}/>
-                        <span className={cls.views}>{oneManga?.like &&  numberConverter?.(oneManga?.like)}</span>
+                        <span className={cls.views}>{oneManga?.like && numberConverter?.(oneManga?.like)}</span>
                     </span>
-            <span className={cls.elementRating}>
+            </div>
+            <div>
+                <div className={cls.titleElementMobile}>Просмотров</div>
+                <span className={cls.elementRating}>
                         <BsFillEyeFill className={cls.eyes}/>
-                        <span className={cls.views}>{oneManga?.views &&  numberConverter?.(oneManga?.views)}</span>
+                        <span className={cls.views}>{oneManga?.views && numberConverter?.(oneManga?.views)}</span>
                     </span>
-            <span className={cls.elementRating}>
+            </div>
+            <div>
+                <div className={cls.titleElementMobile}>В закладках</div>
+                <span className={cls.elementRating}>
                         <BsBookmarksFill className={cls.bsBook}/>
-                        <span className={cls.views}>{oneManga?.tabs &&  numberConverter?.(oneManga?.tabs)}</span>
+                        <span className={cls.views}>{oneManga?.tabs && numberConverter?.(oneManga?.tabs)}</span>
                     </span>
+            </div>
+
             <span className={cls.category}>
                         <span className={cls.views}>{oneManga?.category}</span>
                     </span>
