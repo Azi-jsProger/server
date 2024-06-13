@@ -2,6 +2,10 @@
   "name": "my-react-ts-app",
   "version": "0.1.0",
   "private": true,
+  "main": "server/index.js",
+  "engines": {
+    "node": "14x"
+  },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
@@ -21,8 +25,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "server": "nodemon server/index.js",
-    "dev": "nodemon server/index.js",
+    "server": "node server/index.js",
+    "dev": "node server/index.js",
     "build": "react-scripts build"
   },
   "eslintConfig": {

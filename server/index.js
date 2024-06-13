@@ -6,6 +6,7 @@ const authRouter = require("./router/authRouter");
 const cookieParser = require("cookie-parser");
 const errorMiddleware = require("./middlewares/error-middleware");
 
+
 const PORT = 5000;
 const URL = "mongodb+srv://Arsen03120312:jollo03120312@authroles.kjrqtve.mongodb.net/mangaDb?retryWrites=true&w=majority";
 
