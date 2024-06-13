@@ -5,8 +5,6 @@ import {Create} from "../../../../1pages/Create";
 import NotFound from "../../../../1pages/NotFound/NotFound";
 import {Catalog} from "../../../../1pages/Catalog";
 import {PushCurd} from "../../../../1pages/Push/PushCard";
-import Login from "../../../../3features/Login/ui/Login";
-import {Header} from "../../../../2widgets/Header";
 import {UserRoom} from "../../../../1pages/UserRoom";
 
 enum AppRoutes {
@@ -27,9 +25,9 @@ export const RoutePaths: Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: "/",
     [AppRoutes.CARDMANGA]: "/manga/:itemId",
     [AppRoutes.MANGACONTENT]: "/mangaContent/:mangaId/:chapter/:number",
-    [AppRoutes.MANGATOPS]: "/manga/mangaTops",
+    [AppRoutes.MANGATOPS]: "/mangaTops",
     [AppRoutes.CREATE]: "/manga/create",
-    [AppRoutes.CATALOG]: "/manga/catalog",
+    [AppRoutes.CATALOG]: "/catalog",
     [AppRoutes.PUSH]: "/manga/push",
     [AppRoutes.USERROOM]: "/manga/userRoom",
 

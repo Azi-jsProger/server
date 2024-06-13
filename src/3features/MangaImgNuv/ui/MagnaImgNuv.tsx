@@ -1,6 +1,6 @@
 import React from 'react';
 import {classNames} from "../../../5shered/styleFunction/classNameFn";
-import cls from "./MangaImgNuv.module.scss"
+import cls from "./MangaDescriptionContent.module.scss"
 import Button from "../../../5shered/ui/button";
 import {IPropsForTManga} from "../../../5shered/types/types";
 import {Link} from "react-router-dom";
@@ -41,7 +41,7 @@ const MagnaImgNuv = ({ oneManga, itemId }:IPropsForTManga & TProps) => {
                     <div className={classNames(cls.boxForButton)}>
                         {oneManga.chaptersLists && oneManga.chaptersLists.length ? (
                             <Link
-                                to={`/mangaContent/${itemId}/${lastChapter}`}
+                                to={`/mangaContent/${itemId}/${lastChapter}/${oneManga.chaptersLists.length - 1}`}
                                 className={classNames(cls.buttonA)}
                             >
                                 {lastChapter ? `Продолжить с ${lastChapter}-главы` : "Читать"}

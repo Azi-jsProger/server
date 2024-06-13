@@ -1,4 +1,4 @@
-import MagnaImgNuv from "./ui/MagnaImgNuv";
+import MagnaImgNuv from "../../1pages/MangaDescriptionContent/ui/MagnaImgNuv";
 
 export {
     MagnaImgNuv
