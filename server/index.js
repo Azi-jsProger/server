@@ -8,7 +8,7 @@ const errorMiddleware = require("./middlewares/error-middleware");
 
 
 const PORT = 5000;
-const URL = "mongodb+srv://Arsen03120312:jollo03120312@authroles.kjrqtve.mongodb.net/mangaDb?retryWrites=true&w=majority";
+const URL = "mongodb+srv://aziorozbayev2008:aziazadinanur1882@cluster0.pa1f5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 const app = express();
 const ObjectId = mongoose.Types.ObjectId;
